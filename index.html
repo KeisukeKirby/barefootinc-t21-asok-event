@@ -323,6 +323,50 @@
     .mapbox iframe { display: block; width: 100%; height: 340px; border: 0; filter: grayscale(.25); }
     @media (max-width: 860px) { .access-grid { grid-template-columns: 1fr; } }
 
+    /* ---------- models button + lightbox ---------- */
+    .model-btn {
+      display: inline-flex; align-items: center; gap: .6rem;
+      margin-top: 1.7rem; padding: .72rem 1.5rem;
+      background: var(--black); color: #fff; border: 0; cursor: pointer;
+      font-family: var(--display); font-weight: 600; font-size: .92rem; letter-spacing: .08em;
+    }
+    .model-btn::after {
+      content: ""; width: .46rem; height: .46rem; margin-top: -2px;
+      border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+    }
+    .model-btn:hover { background: var(--gold); color: #000; }
+
+    .lb { position: fixed; inset: 0; z-index: 200; background: rgba(0, 0, 0, .94); }
+    .lb[hidden] { display: none; }
+    .lb-stage {
+      position: absolute; inset: 0; overflow: hidden; touch-action: none;
+      display: flex; align-items: center; justify-content: center;
+      padding: 3.6rem 1rem 3.2rem;
+    }
+    .lb-stage img {
+      max-width: 100%; max-height: 100%;
+      transform-origin: center center; will-change: transform;
+      user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
+      cursor: zoom-in;
+    }
+    .lb.is-zoomed .lb-stage img { cursor: grab; }
+    .lb.is-panning .lb-stage img { cursor: grabbing; }
+    .lb-close {
+      position: absolute; top: .8rem; right: .8rem; z-index: 2;
+      width: 2.8rem; height: 2.8rem; border: 0; cursor: pointer;
+      background: rgba(255, 255, 255, .14); color: #fff;
+      font-family: var(--display); font-size: 1.7rem; line-height: 1;
+    }
+    .lb-close:hover { background: var(--gold); color: #000; }
+    .lb-hint {
+      position: absolute; left: 50%; bottom: 1rem; transform: translateX(-50%);
+      z-index: 2; padding: .42rem .95rem; pointer-events: none;
+      background: rgba(0, 0, 0, .55); color: rgba(255, 255, 255, .82);
+      font-size: .78rem; letter-spacing: .05em; transition: opacity .25s ease;
+    }
+    .lb.is-zoomed .lb-hint { opacity: 0; }
+
     /* ---------- footer ---------- */
     footer { background: #000; color: rgba(255, 255, 255, .6); padding: 2.2rem 0; }
     .foot-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
@@ -450,6 +494,7 @@
             <div class="feat"><span class="dot"></span><span data-i18n="vivo.f3">Flat from heel to toe</span></div>
             <div class="feat"><span class="dot"></span><span data-i18n="vivo.f4">Everyday wear and training</span></div>
           </div>
+          <button type="button" class="model-btn" id="vivoModels" data-i18n="vivo.models">Check Models</button>
         </div>
       </div>
     </div>
@@ -559,6 +604,14 @@
     </div>
   </footer>
 
+  <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Vivobarefoot models">
+    <button type="button" class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <div class="lb-stage" id="lbStage">
+      <img id="lbImg" alt="Vivobarefoot models and festival prices" draggable="false" />
+    </div>
+    <div class="lb-hint" data-i18n="lb.hint">Tap the image to zoom</div>
+  </div>
+
   <script>
     const I18N = {
       en: {
@@ -577,6 +630,8 @@
         "vivo.sub": "Wide, thin and flexible — in a shoe that still looks like a sneaker.",
         "vivo.desc": "The same barefoot thinking in a familiar shape. A foot-shaped toe box lets your toes spread out, the sole is thin, flexible and puncture-resistant, and there is no thick foam or raised heel in the way. Primus Lite IV and the rest of the range are at the booth to try.",
         "vivo.f1": "Wide, foot-shaped toe box", "vivo.f2": "Thin, flexible sole", "vivo.f3": "Flat from heel to toe", "vivo.f4": "Everyday wear and training",
+        "vivo.models": "Check Models",
+        "lb.hint": "Tap the image to zoom",
         "choose.title": "Which pair is yours?",
         "choose.note": "Both let your feet work. They just get there differently — this is the short version, and the staff at the booth will take you through the rest.",
         "choose.r1": "Ground feel", "choose.r1v": "As direct as it gets, with toes moving independently", "choose.r1w": "Very direct, with the foot held as one",
@@ -611,6 +666,8 @@
         "vivo.sub": "กว้าง บาง ยืดหยุ่น ในรูปทรงที่ยังดูเป็นสนีกเกอร์",
         "vivo.desc": "แนวคิดบาร์ฟุตแบบเดียวกัน แต่มาในรูปทรงที่คุ้นตา หน้าเท้ากว้างตามรูปเท้าจริงให้นิ้วเท้ากางได้เต็มที่ พื้นบาง ยืดหยุ่น และกันของแหลม ไม่มีโฟมหนาหรือส้นยกมาขวางการเคลื่อนไหว รุ่น Primus Lite IV และรุ่นอื่นๆ พร้อมให้ลองที่บูธ",
         "vivo.f1": "หน้าเท้ากว้างตามรูปเท้า", "vivo.f2": "พื้นบางและยืดหยุ่น", "vivo.f3": "พื้นเรียบเสมอกันจากส้นถึงปลายเท้า", "vivo.f4": "ใส่ประจำวันและออกกำลังกาย",
+        "vivo.models": "ดูรุ่นทั้งหมด",
+        "lb.hint": "แตะที่ภาพเพื่อซูม",
         "choose.title": "คู่ไหนเหมาะกับคุณ",
         "choose.note": "ทั้งสองแบรนด์ให้เท้าได้ทำงานเหมือนกัน ต่างกันที่วิธีไปถึงจุดนั้น นี่คือฉบับย่อ ส่วนที่เหลือให้ทีมงานที่บูธเล่าให้ฟัง",
         "choose.r1": "การรับรู้พื้น", "choose.r1v": "รับรู้พื้นได้ตรงที่สุด นิ้วเท้าขยับแยกกันได้", "choose.r1w": "รับรู้พื้นได้ชัด โดยเท้ายังอยู่รวมกันเป็นทรงเดียว",
@@ -652,6 +709,126 @@
     const onScroll = () => nav.classList.toggle("solid", window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    /* ---------- models lightbox ---------- */
+    (function () {
+      const SRC = "images/vivobarefoot-models.jpg";
+      const lb = document.getElementById("lb");
+      const stage = document.getElementById("lbStage");
+      const img = document.getElementById("lbImg");
+      const openBtn = document.getElementById("vivoModels");
+      const closeBtn = document.getElementById("lbClose");
+      const MIN = 1, MAX = 4, ZOOM = 2.5, TAP = 8;
+      let s = 1, tx = 0, ty = 0;
+      const pointers = new Map();
+      let downTarget = null, moved = 0, panFrom = null;
+      let pinchDist = 0, pinchScale = 1, pinchMid = null;
+
+      const render = () => {
+        img.style.transform = "translate(" + tx + "px, " + ty + "px) scale(" + s + ")";
+        lb.classList.toggle("is-zoomed", s > 1.01);
+      };
+      const clamp = () => {
+        const r = stage.getBoundingClientRect();
+        const mx = Math.max(0, (img.offsetWidth * s - r.width) / 2);
+        const my = Math.max(0, (img.offsetHeight * s - r.height) / 2);
+        tx = Math.min(mx, Math.max(-mx, tx));
+        ty = Math.min(my, Math.max(-my, ty));
+      };
+      const zoomTo = (ns, px, py) => {
+        const r = stage.getBoundingClientRect();
+        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        ns = Math.min(MAX, Math.max(MIN, ns));
+        tx = px - cx - (px - cx - tx) * ns / s;
+        ty = py - cy - (py - cy - ty) * ns / s;
+        s = ns;
+        clamp();
+        render();
+      };
+      const reset = () => { s = 1; tx = 0; ty = 0; render(); };
+
+      const open = () => {
+        if (!img.getAttribute("src")) img.setAttribute("src", SRC);
+        reset();
+        lb.hidden = false;
+        document.body.style.overflow = "hidden";
+        closeBtn.focus();
+      };
+      const close = () => {
+        lb.hidden = true;
+        document.body.style.overflow = "";
+        openBtn.focus();
+      };
+
+      openBtn.addEventListener("click", open);
+      closeBtn.addEventListener("click", close);
+      document.addEventListener("keydown", e => {
+        if (!lb.hidden && e.key === "Escape") close();
+      });
+
+      stage.addEventListener("pointerdown", e => {
+        downTarget = e.target;
+        stage.setPointerCapture(e.pointerId);
+        pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        moved = 0;
+        if (pointers.size === 2) {
+          const p = [...pointers.values()];
+          pinchDist = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+          pinchScale = s;
+          pinchMid = { x: (p[0].x + p[1].x) / 2, y: (p[0].y + p[1].y) / 2 };
+        } else {
+          panFrom = { x: e.clientX, y: e.clientY, tx: tx, ty: ty };
+        }
+      });
+
+      stage.addEventListener("pointermove", e => {
+        if (!pointers.has(e.pointerId)) return;
+        pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (pointers.size === 2 && pinchDist) {
+          const p = [...pointers.values()];
+          moved = 999;
+          const d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+          zoomTo(pinchScale * d / pinchDist, pinchMid.x, pinchMid.y);
+        } else if (panFrom) {
+          const dx = e.clientX - panFrom.x, dy = e.clientY - panFrom.y;
+          moved = Math.max(moved, Math.hypot(dx, dy));
+          if (s > 1.01) {
+            tx = panFrom.tx + dx;
+            ty = panFrom.ty + dy;
+            lb.classList.add("is-panning");
+            clamp();
+            render();
+          }
+        }
+      });
+
+      const end = e => {
+        if (!pointers.has(e.pointerId)) return;
+        pointers.delete(e.pointerId);
+        lb.classList.remove("is-panning");
+        if (pointers.size) return;
+        if (moved < TAP) {
+          if (downTarget === img) {
+            if (s > 1.01) reset(); else zoomTo(ZOOM, e.clientX, e.clientY);
+          } else {
+            close();
+          }
+        }
+        pinchDist = 0;
+        panFrom = null;
+      };
+      stage.addEventListener("pointerup", end);
+      stage.addEventListener("pointercancel", end);
+
+      stage.addEventListener("wheel", e => {
+        e.preventDefault();
+        zoomTo(s * (e.deltaY < 0 ? 1.18 : 1 / 1.18), e.clientX, e.clientY);
+      }, { passive: false });
+
+      window.addEventListener("resize", () => {
+        if (!lb.hidden) { clamp(); render(); }
+      });
+    })();
   </script>
 </body>
 
