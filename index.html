@@ -331,19 +331,6 @@
     }
     .sale-tag + .model-btn { margin-top: .85rem; }
 
-    .line-block {
-      margin-top: 2.4rem; display: flex; align-items: center;
-      gap: 1.1rem; flex-wrap: wrap;
-    }
-    .line-cta {
-      display: inline-flex; align-items: center; gap: .7rem;
-      background: #06C755; color: #fff; text-decoration: none;
-      padding: .8rem 1.6rem;
-      font-family: var(--display); font-weight: 600; font-size: 1rem; letter-spacing: .06em;
-    }
-    .line-cta svg { width: 1.5rem; height: 1.5rem; fill: currentColor; display: block; }
-    .line-cta:hover { background: #05A948; }
-    .line-note { font-size: .9rem; color: rgba(255, 255, 255, .7); }
 
     /* ---------- models button + lightbox ---------- */
     .model-btn {
@@ -358,6 +345,22 @@
       transform: rotate(-45deg);
     }
     .model-btn:hover { background: var(--gold); color: #000; }
+
+    .line-fab {
+      position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 90;
+      width: 3.5rem; height: 3.5rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: #06C755; color: #fff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .3);
+      transition: background-color .2s ease, transform .2s ease;
+    }
+    .line-fab svg { width: 1.95rem; height: 1.95rem; fill: currentColor; display: block; }
+    .line-fab:hover { background: #05A948; transform: translateY(-2px); }
+    body.lb-open .line-fab { display: none; }
+    @media (max-width: 620px) {
+      .line-fab { width: 3.2rem; height: 3.2rem; right: .9rem; bottom: .9rem; }
+      .line-fab svg { width: 1.75rem; height: 1.75rem; }
+    }
 
     .lb { position: fixed; inset: 0; z-index: 200; background: rgba(0, 0, 0, .94); }
     .lb[hidden] { display: none; }
@@ -589,13 +592,6 @@
             in the first weeks.</p>
         </div>
       </div>
-      <div class="line-block">
-        <a class="line-cta" href="https://lin.ee/NtER69r" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" /></svg>
-          <span data-i18n="line.cta">Add us on LINE</span>
-        </a>
-        <span class="line-note" data-i18n="line.note">New stock and promotions, straight to your phone.</span>
-      </div>
     </div>
   </section>
 
@@ -657,6 +653,11 @@
     </div>
   </footer>
 
+  <a class="line-fab" href="https://lin.ee/NtER69r" target="_blank" rel="noopener noreferrer"
+    aria-label="Add Barefootinc Thailand on LINE" title="LINE">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" /></svg>
+  </a>
+
   <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Vivobarefoot models">
     <button type="button" class="lb-close" id="lbClose" aria-label="Close">&times;</button>
     <div class="lb-stage" id="lbStage">
@@ -686,8 +687,6 @@
         "vivo.models": "Check Models",
         "lb.hint": "Tap the image to zoom",
         "vivo.sale": "All Models 10% OFF",
-        "line.cta": "Add us on LINE",
-        "line.note": "New stock and promotions, straight to your phone.",
         "choose.title": "Which pair is yours?",
         "choose.note": "Both let your feet work. They just get there differently — this is the short version, and the staff at the booth will take you through the rest.",
         "choose.r1": "Ground feel", "choose.r1v": "As direct as it gets, with toes moving independently", "choose.r1w": "Very direct, with the foot held as one",
@@ -725,8 +724,6 @@
         "vivo.models": "ดูรุ่นทั้งหมด",
         "lb.hint": "แตะที่ภาพเพื่อซูม",
         "vivo.sale": "ทุกรุ่น ลด 10%",
-        "line.cta": "เพิ่มเพื่อนใน LINE",
-        "line.note": "รับข่าวสารสินค้าเข้าใหม่และโปรโมชั่นก่อนใคร",
         "choose.title": "คู่ไหนเหมาะกับคุณ",
         "choose.note": "ทั้งสองแบรนด์ให้เท้าได้ทำงานเหมือนกัน ต่างกันที่วิธีไปถึงจุดนั้น นี่คือภาพรวมคร่าวๆ ส่วนรายละเอียดให้ทีมงานที่บูธอธิบายให้ฟัง",
         "choose.r1": "สัมผัสพื้น", "choose.r1v": "รับรู้พื้นได้ตรงที่สุด นิ้วเท้าขยับแยกกันได้", "choose.r1w": "รับรู้พื้นได้ชัด แต่เท้ายังอยู่รวมกันทั้งเท้า",
@@ -811,11 +808,13 @@
         reset();
         lb.hidden = false;
         document.body.style.overflow = "hidden";
+        document.body.classList.add("lb-open");
         closeBtn.focus();
       };
       const close = () => {
         lb.hidden = true;
         document.body.style.overflow = "";
+        document.body.classList.remove("lb-open");
         openBtn.focus();
       };
 
