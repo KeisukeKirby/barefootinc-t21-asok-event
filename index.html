@@ -266,7 +266,8 @@
     .brand-vivo .feat .dot { background: var(--slate); }
     @media (max-width: 860px) {
       .brand-grid, .brand-vivo .brand-grid { grid-template-columns: 1fr; direction: ltr; }
-      .brand-photo img { aspect-ratio: 3 / 2; }
+      /* the 3/2 crop cuts the shoe out of a 4/5 frame; hold the bottom */
+      .brand-photo img { aspect-ratio: 3 / 2; object-position: center bottom; }
     }
 
     /* ---------- choose ---------- */
