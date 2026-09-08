@@ -368,34 +368,8 @@
     .btn-row { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: .85rem; }
     .btn-row .model-btn { margin-top: 0; }
 
-    .lb-doc {
-      position: absolute; inset: 0; z-index: 1; overflow-y: auto;
-      padding: 3.6rem 1.1rem 3.2rem; color: #fff;
-      background: #0A0A0A;
-      -webkit-overflow-scrolling: touch;
-    }
-    .lb-doc[hidden] { display: none; }
-    .sc-wrap { width: min(720px, 100%); margin-inline: auto; }
-    .sc-wrap h2 {
-      font-family: var(--display); font-size: clamp(1.3rem, 4vw, 1.8rem);
-      text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1.4rem;
-    }
-    .sc-wrap h3 {
-      font-family: var(--display); font-size: .92rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--gold); margin: 1.8rem 0 .6rem;
-    }
-    .sc { width: 100%; border-collapse: collapse; font-size: .88rem; }
-    .sc th, .sc td { padding: .52rem .35rem; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, .14); }
-    .sc th {
-      font-family: var(--display); font-weight: 600; font-size: .74rem;
-      letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .7);
-    }
-    .sc th:first-child, .sc td:first-child { text-align: left; }
-    .sc-note { margin-top: 1.4rem; font-size: .85rem; line-height: 1.7; color: rgba(255, 255, 255, .68); }
-
     .lb { position: fixed; inset: 0; z-index: 200; background: rgba(0, 0, 0, .94); }
     .lb[hidden] { display: none; }
-    .lb-stage[hidden] { display: none; }
     .lb-stage {
       position: absolute; inset: 0; overflow: hidden; touch-action: none;
       display: flex; align-items: center; justify-content: center;
@@ -564,7 +538,8 @@
           <div class="btn-row">
             <button type="button" class="model-btn" data-lb="image" data-lb-src="images/vivobarefoot-models.jpg"
               data-lb-alt="Vivobarefoot models and festival prices" data-i18n="vivo.models">Check Models</button>
-            <button type="button" class="model-btn" data-lb="doc" data-i18n="vivo.size">Check Your Size</button>
+            <button type="button" class="model-btn" data-lb="image" data-lb-src="images/vivobarefoot-size-chart.jpg"
+              data-lb-alt="Vivobarefoot size chart, men's and women's" data-i18n="vivo.size">Check Your Size</button>
           </div>
         </div>
       </div>
@@ -692,50 +667,6 @@
     <div class="lb-stage" id="lbStage">
       <img id="lbImg" alt="Vivobarefoot models and festival prices" draggable="false" />
     </div>
-    <div class="lb-doc" id="lbDoc" hidden>
-      <div class="sc-wrap">
-        <h2 data-i18n="sc.title">Vivobarefoot size chart</h2>
-        <h3 data-i18n="sc.men">Men's footwear</h3>
-          <table class="sc">
-            <thead>
-              <tr><th data-i18n="sc.len">Foot length (cm)</th><th>EU</th><th>UK</th><th>US</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>24.6 – 25.5</td><td>40</td><td>6</td><td>7</td></tr>
-              <tr><td>25.6 – 26.2</td><td>41</td><td>7</td><td>8</td></tr>
-              <tr><td>26.3 – 26.9</td><td>42</td><td>8</td><td>9</td></tr>
-              <tr><td>27.0 – 27.5</td><td>43</td><td>9</td><td>10</td></tr>
-              <tr><td>27.6 – 28.2</td><td>44</td><td>10</td><td>11</td></tr>
-              <tr><td>28.3 – 28.9</td><td>45</td><td>11</td><td>12</td></tr>
-              <tr><td>29.0 – 29.6</td><td>46</td><td>11.5</td><td>12.5</td></tr>
-              <tr><td>29.7 – 30.3</td><td>47</td><td>12</td><td>13</td></tr>
-              <tr><td>30.4 – 30.9</td><td>48</td><td>13</td><td>14</td></tr>
-              <tr><td>31.0 – 31.6</td><td>49</td><td>14</td><td>15</td></tr>
-              <tr><td>31.7 – 32.3</td><td>50</td><td>15</td><td>16</td></tr>
-              <tr><td>32.4 – 33.0</td><td>51</td><td>16</td><td>17</td></tr>
-            </tbody>
-          </table>
-        <h3 data-i18n="sc.women">Women's footwear</h3>
-          <table class="sc">
-            <thead>
-              <tr><th data-i18n="sc.len">Foot length (cm)</th><th>EU</th><th>UK</th><th>US</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>21.2 – 22.1</td><td>35</td><td>2.5</td><td>4.5</td></tr>
-              <tr><td>22.2 – 22.8</td><td>36</td><td>3</td><td>5</td></tr>
-              <tr><td>22.9 – 23.5</td><td>37</td><td>4</td><td>6</td></tr>
-              <tr><td>23.6 – 24.1</td><td>38</td><td>5</td><td>7</td></tr>
-              <tr><td>24.2 – 24.8</td><td>39</td><td>6</td><td>8</td></tr>
-              <tr><td>24.9 – 25.4</td><td>40</td><td>7</td><td>9</td></tr>
-              <tr><td>25.5 – 26.1</td><td>41</td><td>8</td><td>10</td></tr>
-              <tr><td>26.2 – 26.8</td><td>42</td><td>8.5</td><td>10.5</td></tr>
-              <tr><td>26.9 – 27.4</td><td>43</td><td>9</td><td>11</td></tr>
-            </tbody>
-          </table>
-        <p class="sc-note" data-i18n="sc.note">Stand with your heel against a wall and measure to your longest toe.
-          Barefoot sizing is not your usual size — our staff measure your feet at the booth.</p>
-      </div>
-    </div>
     <div class="lb-hint" id="lbHint" data-i18n="lb.hint">Tap the image to zoom</div>
   </div>
 
@@ -760,11 +691,6 @@
         "vivo.models": "Check Models",
         "lb.hint": "Tap the image to zoom",
         "vivo.size": "Check Your Size",
-        "sc.title": "Vivobarefoot size chart",
-        "sc.men": "Men's footwear",
-        "sc.women": "Women's footwear",
-        "sc.len": "Foot length (cm)",
-        "sc.note": "Stand with your heel against a wall and measure to your longest toe. Barefoot sizing is not your usual size — our staff measure your feet at the booth.",
         "vivo.sale": "All Models 10% OFF",
         "choose.title": "Which pair is yours?",
         "choose.note": "Both let your feet work. They just get there differently — this is the short version, and the staff at the booth will take you through the rest.",
@@ -801,11 +727,6 @@
         "vivo.models": "ดูรุ่นทั้งหมด",
         "lb.hint": "แตะที่ภาพเพื่อซูม",
         "vivo.size": "ดูไซซ์ของคุณ",
-        "sc.title": "ตารางไซซ์ Vivobarefoot",
-        "sc.men": "รองเท้าผู้ชาย",
-        "sc.women": "รองเท้าผู้หญิง",
-        "sc.len": "ความยาวเท้า (ซม.)",
-        "sc.note": "ยืนให้ส้นเท้าชิดผนัง แล้ววัดถึงปลายนิ้วที่ยาวที่สุด ไซซ์รองเท้าบาร์ฟุตมักไม่ตรงกับไซซ์ที่คุณใส่ประจำ ทีมงานวัดเท้าให้ได้ที่บูธ",
         "vivo.sale": "ทุกรุ่น ลด 10%",
         "choose.title": "คู่ไหนเหมาะกับคุณ",
         "choose.note": "ทั้งสองแบรนด์ให้เท้าได้ทำงานเหมือนกัน ต่างกันที่วิธีไปถึงจุดนั้น นี่คือภาพรวมคร่าวๆ ส่วนรายละเอียดให้ทีมงานที่บูธอธิบายให้ฟัง",
@@ -852,8 +773,6 @@
       const lb = document.getElementById("lb");
       const stage = document.getElementById("lbStage");
       const img = document.getElementById("lbImg");
-      const doc = document.getElementById("lbDoc");
-      const hint = document.getElementById("lbHint");
       const triggers = [...document.querySelectorAll("[data-lb]")];
       const closeBtn = document.getElementById("lbClose");
       let opener = null;
@@ -888,17 +807,10 @@
 
       const open = trigger => {
         opener = trigger;
-        const asDoc = trigger.dataset.lb === "doc";
-        if (!asDoc) {
-          const src = trigger.dataset.lbSrc;
-          if (img.getAttribute("src") !== src) img.setAttribute("src", src);
-          img.setAttribute("alt", trigger.dataset.lbAlt || "");
-          reset();
-        }
-        stage.hidden = asDoc;
-        hint.hidden = asDoc;
-        doc.hidden = !asDoc;
-        if (asDoc) doc.scrollTop = 0;
+        const src = trigger.dataset.lbSrc;
+        if (img.getAttribute("src") !== src) img.setAttribute("src", src);
+        img.setAttribute("alt", trigger.dataset.lbAlt || "");
+        reset();
         lb.hidden = false;
         document.body.style.overflow = "hidden";
         document.body.classList.add("lb-open");
