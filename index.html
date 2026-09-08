@@ -148,8 +148,9 @@
       position: absolute; z-index: 5; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: min(720px, calc(100% - 2.5rem));
-      background: rgba(6, 6, 6, .82);
-      backdrop-filter: blur(6px);
+      background: rgba(6, 6, 6, .42);
+      backdrop-filter: blur(3px);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, .6), 0 2px 18px rgba(0, 0, 0, .7);
       color: #fff;
       padding: clamp(1.8rem, 4vw, 3rem) clamp(1.4rem, 4vw, 3rem) clamp(1.6rem, 3.6vw, 2.4rem);
       text-align: center;
@@ -317,13 +318,18 @@
     .mapbox iframe { display: block; width: 100%; height: 340px; border: 0; filter: grayscale(.25); }
     @media (max-width: 860px) { .access-grid { grid-template-columns: 1fr; } }
 
-    .sale-tag {
-      display: block; width: fit-content; margin-top: 1.7rem;
-      background: var(--t21-m); color: #fff;
-      font-family: var(--display); font-weight: 600; font-size: 1rem; letter-spacing: .08em;
-      padding: .48rem 1.05rem;
+    .sale-stack {
+      display: flex; flex-direction: column; align-items: flex-start;
+      gap: .5rem; margin-top: 1.7rem;
     }
-    .sale-tag + .model-btn { margin-top: .85rem; }
+    .sale-tag {
+      display: block; width: fit-content;
+      background: var(--t21-m); color: #fff;
+      font-family: var(--display); font-weight: 700; letter-spacing: .04em;
+      font-size: clamp(1.15rem, 2.7vw, 1.65rem); line-height: 1.25;
+      padding: .5rem 1.1rem;
+    }
+    .sale-stack + .btn-row { margin-top: 1.1rem; }
 
 
     /* ---------- models button + lightbox ---------- */
@@ -489,6 +495,10 @@
             <div class="feat"><span class="dot"></span><span data-i18n="vff.f3">Water and travel</span></div>
             <div class="feat"><span class="dot"></span><span data-i18n="vff.f4">Everyday wear</span></div>
           </div>
+          <div class="sale-stack">
+            <div class="sale-tag" data-i18n="vff.sale1">Regular Items 10% OFF</div>
+            <div class="sale-tag" data-i18n="vff.sale2">Selected Items 20% OFF</div>
+          </div>
         </div>
       </div>
     </div>
@@ -514,10 +524,10 @@
             <div class="feat"><span class="dot"></span><span data-i18n="vivo.f3">Flat from heel to toe</span></div>
             <div class="feat"><span class="dot"></span><span data-i18n="vivo.f4">Everyday wear and training</span></div>
           </div>
-          <div class="sale-tag" data-i18n="vivo.sale">All Models 10% OFF</div>
+          <div class="sale-stack">
+            <div class="sale-tag" data-i18n="vivo.sale">All Items 10%–20% OFF</div>
+          </div>
           <div class="btn-row">
-            <button type="button" class="model-btn" data-lb="image" data-lb-src="images/vivobarefoot-models.jpg"
-              data-lb-alt="Vivobarefoot models and festival prices" data-i18n="vivo.models">Check Models</button>
             <button type="button" class="model-btn" data-lb="image" data-lb-src="images/vivobarefoot-size-chart.jpg"
               data-lb-alt="Vivobarefoot size chart, men's and women's" data-i18n="vivo.size">Check Your Size</button>
           </div>
@@ -666,10 +676,11 @@
         "vivo.sub": "Wide, thin and flexible — in a shoe that still looks like a sneaker.",
         "vivo.desc": "The same barefoot thinking in a familiar shape. A foot-shaped toe box lets your toes spread out, the sole is thin, flexible and puncture-resistant, and there is no thick foam or raised heel in the way. Primus Lite IV and the rest of the range are at the booth to try.",
         "vivo.f1": "Wide, foot-shaped toe box", "vivo.f2": "Thin, flexible sole", "vivo.f3": "Flat from heel to toe", "vivo.f4": "Everyday wear and training",
-        "vivo.models": "Check Models",
         "lb.hint": "Tap the image to zoom",
         "vivo.size": "Check Your Size",
-        "vivo.sale": "All Models 10% OFF",
+        "vivo.sale": "All Items 10%–20% OFF",
+        "vff.sale1": "Regular Items 10% OFF",
+        "vff.sale2": "Selected Items 20% OFF",
         "choose.title": "Which pair is yours?",
         "choose.note": "Both let your feet work. They just get there differently — this is the short version, and the staff at the booth will take you through the rest.",
         "choose.r1": "Ground feel", "choose.r1v": "As direct as it gets, with toes moving independently", "choose.r1w": "Very direct, with the foot held as one",
@@ -700,10 +711,11 @@
         "vivo.sub": "กว้าง บาง ยืดหยุ่น ในรูปทรงที่ยังดูเป็นสนีกเกอร์",
         "vivo.desc": "แนวคิดบาร์ฟุตแบบเดียวกัน แต่มาในรูปทรงที่คุ้นตา หน้าเท้ากว้างตามรูปเท้าจริงให้นิ้วเท้ากางได้เต็มที่ พื้นบาง ยืดหยุ่น และทนต่อของมีคม ไม่มีโฟมหนาหรือส้นยกสูงมาขวางการเคลื่อนไหว รุ่น Primus Lite IV และรุ่นอื่นๆ พร้อมให้ลองที่บูธ",
         "vivo.f1": "หน้าเท้ากว้างตามรูปเท้า", "vivo.f2": "พื้นบางและยืดหยุ่น", "vivo.f3": "ส้นกับปลายเท้าอยู่ระดับเดียวกัน", "vivo.f4": "ใส่ประจำวันและออกกำลังกาย",
-        "vivo.models": "ดูรุ่นทั้งหมด",
         "lb.hint": "แตะที่ภาพเพื่อซูม",
         "vivo.size": "ดูไซซ์ของคุณ",
-        "vivo.sale": "ทุกรุ่น ลด 10%",
+        "vivo.sale": "ทุกรายการ ลด 10%–20%",
+        "vff.sale1": "สินค้าปกติ ลด 10%",
+        "vff.sale2": "สินค้าร่วมรายการ ลด 20%",
         "choose.title": "คู่ไหนเหมาะกับคุณ",
         "choose.note": "ทั้งสองแบรนด์ให้เท้าได้ทำงานเหมือนกัน ต่างกันที่วิธีไปถึงจุดนั้น นี่คือภาพรวมคร่าวๆ ส่วนรายละเอียดให้ทีมงานที่บูธอธิบายให้ฟัง",
         "choose.r1": "สัมผัสพื้น", "choose.r1v": "รับรู้พื้นได้ตรงที่สุด นิ้วเท้าขยับแยกกันได้", "choose.r1w": "รับรู้พื้นได้ชัด แต่เท้ายังอยู่รวมกันทั้งเท้า",
