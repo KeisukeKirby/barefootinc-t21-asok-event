@@ -172,16 +172,16 @@
     }
     .hero-brands {
       display: flex; align-items: center; justify-content: center;
-      gap: clamp(.9rem, 2.8vw, 1.8rem);
-      margin-top: 1.5rem; flex-wrap: wrap;
+      gap: clamp(.85rem, 3.2vw, 2.1rem);
+      margin-bottom: clamp(1.3rem, 3vw, 2rem); flex-wrap: wrap;
     }
     .hero-brands .x {
       font-family: var(--display); color: var(--gold); line-height: 1;
-      font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+      font-size: clamp(1.3rem, 3.4vw, 2rem);
     }
     .hero-brands .blogo { width: auto; }
-    .blogo-vff { height: clamp(26px, 4.4vw, 42px); }
-    .blogo-vivo { height: clamp(18px, 3.1vw, 30px); }
+    .blogo-vff { height: clamp(30px, 6.2vw, 60px); }
+    .blogo-vivo { height: clamp(21px, 4.3vw, 42px); }
     .cta {
       display: inline-block; margin-top: 1.6rem;
       background: var(--gold); color: #000; text-decoration: none;
@@ -217,17 +217,6 @@
       .strip-inner { grid-template-columns: 1fr; }
       .strip-cell { border-left: 0; border-top: 1px solid rgba(255,255,255,.12); padding: 1rem; }
       .strip-cell:first-child { border-top: 0; }
-    }
-
-    /* ---------- intro ---------- */
-    .intro { padding: clamp(3.5rem, 9vw, 6.5rem) 0; }
-    .intro p {
-      font-size: clamp(1.15rem, 2.6vw, 1.6rem);
-      line-height: 1.55; max-width: 30ch; font-weight: 300;
-    }
-    .intro .lead2 {
-      font-size: clamp(.98rem, 2vw, 1.08rem); max-width: 62ch; margin-top: 1.6rem;
-      color: #4A4750; font-weight: 400; line-height: 1.8;
     }
 
     /* ---------- brand blocks ---------- */
@@ -451,13 +440,13 @@
       aria-label="Vivobarefoot Primus Lite IV worn in a studio"></div>
 
     <div class="hero-card">
-      <div class="hero-edition" data-i18n="hero.edition">24TH ABSOLUTE</div>
-      <h1 data-i18n="hero.title">The Festival of Movement</h1>
       <div class="hero-brands">
         <img class="blogo blogo-vff" src="images/logo-vff.png" alt="Vibram FiveFingers"
           width="720" height="155" /><span class="x">&times;</span><img class="blogo blogo-vivo"
           src="images/logo-vivo.png" alt="Vivobarefoot" width="720" height="130" />
       </div>
+      <div class="hero-edition" data-i18n="hero.edition">POPUP STORE</div>
+      <h1 data-i18n="hero.title">Terminal 21 Asok G&nbsp;Floor</h1>
       <a class="cta" href="#access" data-i18n="hero.cta">Find the booth</a>
     </div>
   </header>
@@ -478,17 +467,6 @@
           <div class="v" data-i18n="strip.v3">Terminal 21 Asok, G Floor</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="intro">
-    <div class="wrap">
-      <p data-i18n="intro.lead">Your feet have 26 bones, 33 joints and more than 100 muscles.<br />Most shoes let
-        almost none of them work.</p>
-      <p class="lead2" data-i18n="intro.body">Barefoot shoes get out of the way. A toe box wide enough for your toes
-        to spread, a sole thin enough to read the ground under you, and no raised heel tipping you forward — so your
-        foot can move, grip and balance the way it was built to. For 20 days at Terminal 21 Asok, put a pair on and
-        feel the difference in a minute.</p>
     </div>
   </section>
 
@@ -676,14 +654,12 @@
     const I18N = {
       en: {
         "nav.access": "Getting there",
-        "hero.edition": "24TH ABSOLUTE",
-        "hero.title": "The Festival of Movement",
+        "hero.edition": "POPUP STORE",
+        "hero.title": "Terminal 21 Asok G&nbsp;Floor",
         "hero.cta": "Find the booth",
         "strip.k1": "DATES", "strip.v1": "15 Sep&nbsp;(TUE) – 4 Oct&nbsp;(SUN) 2026",
         "strip.k2": "OPEN DAILY", "strip.v2": "10:00 – 22:00",
         "strip.k3": "VENUE", "strip.v3": "Terminal 21 Asok, G Floor",
-        "intro.lead": "Your feet have 26 bones, 33 joints and more than 100 muscles.<br />Most shoes let almost none of them work.",
-        "intro.body": "Barefoot shoes get out of the way. A toe box wide enough for your toes to spread, a sole thin enough to read the ground under you, and no raised heel tipping you forward — so your foot can move, grip and balance the way it was built to. For 20 days at Terminal 21 Asok, put a pair on and feel the difference in a minute.",
         "vff.sub": "Five separate toes, and nothing between you and the ground.",
         "vff.desc": "Every toe gets its own pocket, so your foot can spread, grip and balance the way it does barefoot. The Vibram rubber sole is thin enough to read the surface under you and tough enough for real ground. Models for the gym, the trail, the water and the street.",
         "vff.f1": "Gym and training", "vff.f2": "Trail and outdoors", "vff.f3": "Water and travel", "vff.f4": "Everyday wear",
@@ -712,14 +688,12 @@
       },
       th: {
         "nav.access": "วิธีเดินทาง",
-        "hero.edition": "24TH ABSOLUTE",
-        "hero.title": "The Festival of Movement",
+        "hero.edition": "POPUP STORE",
+        "hero.title": "เทอร์มินอล 21 อโศก ชั้น&nbsp;G",
         "hero.cta": "ดูตำแหน่งบูธ",
         "strip.k1": "วันที่", "strip.v1": "อ.&nbsp;15 ก.ย. – อา.&nbsp;4 ต.ค. 2569",
         "strip.k2": "เปิดทุกวัน", "strip.v2": "10:00 – 22:00",
         "strip.k3": "สถานที่", "strip.v3": "เทอร์มินอล 21 อโศก ชั้น G",
-        "intro.lead": "เท้าของเรามีกระดูก 26 ชิ้น ข้อต่อ 33 ข้อ และกล้ามเนื้ออีกกว่า 100 มัด<br />แต่รองเท้าส่วนใหญ่แทบไม่เปิดโอกาสให้ส่วนเหล่านี้ได้ทำงานเลย",
-        "intro.body": "รองเท้าบาร์ฟุตคือการเอาทุกอย่างที่ขวางการทำงานของเท้าออกไป หน้าเท้ากว้างพอให้นิ้วเท้ากางได้เต็มที่ พื้นบางพอให้รับรู้พื้นใต้เท้า และไม่มีส้นยกสูงจนทำให้เท้าเอียงไปข้างหน้า เท้าจึงขยับ จิกพื้น และทรงตัวได้ตามที่ธรรมชาติออกแบบมา ตลอด 20 วันที่เทอร์มินอล 21 อโศก ลองสวมสักคู่แล้วจะรู้สึกถึงความต่างได้ในไม่กี่นาที",
         "vff.sub": "ห้านิ้วแยกอิสระ ไม่มีอะไรมากั้นระหว่างเท้ากับพื้น",
         "vff.desc": "นิ้วเท้าทุกนิ้วมีช่องของตัวเอง เท้าจึงกางนิ้ว จิกพื้น และทรงตัวได้เหมือนตอนเท้าเปล่า พื้นยาง Vibram บางพอให้รับรู้พื้นผิวใต้เท้า แต่ก็ทนพอสำหรับการใช้งานจริง มีให้เลือกทั้งรุ่นสำหรับฟิตเนส เทรล ลุยน้ำ และใส่เดินในเมือง",
         "vff.f1": "ฟิตเนสและเทรนนิ่ง", "vff.f2": "เทรลและกิจกรรมกลางแจ้ง", "vff.f3": "ลุยน้ำและเดินทาง", "vff.f4": "ใส่ในชีวิตประจำวัน",
