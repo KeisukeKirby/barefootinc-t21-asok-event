@@ -887,6 +887,11 @@
     nav.classList.toggle("solid", scrollTop() > 40);
     ["scroll", "touchmove", "wheel"].forEach(ev =>
       window.addEventListener(ev, onScroll, { passive: true, capture: true }));
+    /* A thumb scrolls by swiping again while the last swipe is still
+       coasting, so the event stream never goes quiet and the 150ms rule
+       above sees one long scroll. Each finger landing is a new scroll,
+       so it re-arms; a tap alone sends no touchmove and shakes nothing. */
+    window.addEventListener("touchstart", () => { armed = true; }, { passive: true, capture: true });
 
     /* ---------- models lightbox ---------- */
     (function () {
