@@ -7,9 +7,9 @@
 
   <title>Vibram FiveFingers &amp; Vivobarefoot at 24th Absolute The Festival of Movement | Terminal 21 Asok, 15 Sep – 4 Oct 2026</title>
   <meta name="description"
-    content="Try Vibram FiveFingers and Vivobarefoot barefoot shoes at 24th Absolute The Festival of Movement, Terminal 21 Asok G Floor, 15 September – 4 October 2026. พบกับ Vibram FiveFingers และ Vivobarefoot ที่เทอร์มินอล 21 อโศก ชั้น G" />
+    content="Try Vibram FiveFingers and Vivobarefoot barefoot footwear at 24th Absolute The Festival of Movement, Terminal 21 Asok G Floor, 15 September – 4 October 2026. พบกับ Vibram FiveFingers และ Vivobarefoot ที่เทอร์มินอล 21 อโศก ชั้น G" />
   <meta name="keywords"
-    content="Vibram FiveFingers, Vivobarefoot, barefoot shoes, Terminal 21 Asok, Festival of Movement, Absolute, Bangkok, Primus Lite IV, รองเท้าบาร์ฟุต, เทอร์มินอล 21 อโศก" />
+    content="Vibram FiveFingers, Vivobarefoot, barefoot footwear, Terminal 21 Asok, Festival of Movement, Absolute, Bangkok, Primus Lite IV, รองเท้าบาร์ฟุต, เทอร์มินอล 21 อโศก" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="author" content="Barefootinc (Thailand)" />
 
@@ -17,7 +17,7 @@
   <meta property="og:site_name" content="Barefootinc Thailand" />
   <meta property="og:title" content="Vibram FiveFingers &amp; Vivobarefoot | 24th Absolute The Festival of Movement" />
   <meta property="og:description"
-    content="15 September – 4 October 2026 at Terminal 21 Asok, G Floor. Two barefoot brands, one booth — try every model on your own feet." />
+    content="15 September – 4 October 2026 at Terminal 21 Asok, G Floor. Two barefoot brands, one booth – try every model on your own feet." />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="th_TH" />
   <meta property="og:url" content="https://barefootinc-t21-asok-event.vercel.app/" />
@@ -139,12 +139,16 @@
     .hero-card {
       position: absolute; z-index: 5; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: min(720px, calc(100% - 2.5rem));
+      /* the Vivo mark drives the card: its exclusion zone is 4X, and X is
+         the wordmark cap height, .0699 of the lockup width */
+      --vivo-w: clamp(150px, 15.8vw, 227px);
+      --vivo-clear: calc(var(--vivo-w) * .28);
+      width: min(880px, calc(100% - 2.5rem));
       background: rgba(6, 6, 6, .42);
       backdrop-filter: blur(3px);
       text-shadow: 0 1px 3px rgba(0, 0, 0, .6), 0 2px 18px rgba(0, 0, 0, .7);
       color: #fff;
-      padding: clamp(1.8rem, 4vw, 3rem) clamp(1.4rem, 4vw, 3rem) clamp(1.6rem, 3.6vw, 2.4rem);
+      padding: max(clamp(1.8rem, 4vw, 3rem), var(--vivo-clear)) clamp(1.4rem, 4vw, 3rem) clamp(1.6rem, 3.6vw, 2.4rem);
       text-align: center;
       border-top: 3px solid var(--gold);
     }
@@ -165,17 +169,23 @@
     }
     .hero-brands {
       display: flex; align-items: center; justify-content: center;
-      gap: clamp(.85rem, 3.2vw, 2.1rem);
-      margin-bottom: clamp(1.3rem, 3vw, 2rem); flex-wrap: wrap;
+      gap: var(--vivo-clear);
+      margin-bottom: var(--vivo-clear); flex-wrap: wrap;
     }
     .hero-brands .sep {
       flex: 0 0 auto; width: 2px; border-radius: 1px;
-      height: clamp(28px, 5.6vw, 54px);
+      height: calc(var(--vivo-w) * .24);
       background: rgba(255, 255, 255, .5);
     }
-    .hero-brands .blogo { width: auto; }
-    .blogo-vff { height: clamp(30px, 6.2vw, 60px); }
-    .blogo-vivo { height: clamp(21px, 4.3vw, 42px); }
+    .hero-brands .blogo { height: auto; }
+    .blogo-vivo { width: var(--vivo-w); }
+    .blogo-vff { width: calc(var(--vivo-w) * 1.23); }
+    /* below this the two marks cannot sit side by side and still clear
+       the exclusion zone, so they stack and the rule turns on its side */
+    @media (max-width: 600px) {
+      .hero-brands { flex-direction: column; }
+      .hero-brands .sep { width: calc(var(--vivo-w) * .28); height: 2px; }
+    }
     .cta {
       display: inline-block; margin-top: 1.6rem;
       background: var(--gold); color: #000; text-decoration: none;
@@ -224,7 +234,12 @@
     .brand-photo img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 5; }
     .brand-logo { width: auto; margin-bottom: .85rem; }
     .brand-vff .brand-logo { height: clamp(24px, 3.4vw, 34px); }
-    .brand-vivo .brand-logo { height: clamp(17px, 2.5vw, 24px); }
+    /* primary lockup: exclusion zone 4X is .342 of its width */
+    .brand-vivo .brand-logo {
+      --w: clamp(64px, 6.6vw, 96px);
+      width: var(--w); height: auto;
+      margin-bottom: calc(var(--w) * .342);
+    }
     .brand h2 {
       font-size: clamp(1.9rem, 5vw, 3.1rem); text-transform: uppercase; font-weight: 700;
       margin-bottom: .5rem;
@@ -451,7 +466,7 @@
       <div class="hero-brands">
         <img class="blogo blogo-vff" src="images/logo-vff.png" alt="Vibram FiveFingers"
           width="720" height="155" /><span class="sep" aria-hidden="true"></span><img class="blogo blogo-vivo"
-          src="images/logo-vivo.png" alt="Vivobarefoot" width="720" height="130" />
+          src="images/logo-vivo.png" alt="Vivobarefoot" width="1400" height="200" />
       </div>
       <div class="hero-edition" data-i18n="hero.edition">POPUP STORE</div>
       <h1 data-i18n="hero.title">Terminal 21 Asok G&nbsp;Floor</h1>
@@ -468,7 +483,7 @@
         </div>
         <div class="strip-cell">
           <div class="k" data-i18n="strip.k2">OPEN DAILY</div>
-          <div class="v" data-i18n="strip.v2">10:00 – 22:00</div>
+          <div class="v" data-i18n="strip.v2">10 am - 10 pm</div>
         </div>
         <div class="strip-cell">
           <div class="k" data-i18n="strip.k3">VENUE</div>
@@ -513,9 +528,9 @@
           <img src="images/brand-vivo.jpg" alt="Vivobarefoot Motus Strength II in training" loading="lazy" />
         </div>
         <div>
-          <img class="brand-logo" src="images/logo-vivo-dark.png" alt="Vivobarefoot" width="720" height="130" />
+          <img class="brand-logo" src="images/logo-vivo-portrait.png" alt="Vivobarefoot" width="1000" height="668" />
           <h2>Vivobarefoot</h2>
-          <div class="sub" data-i18n="vivo.sub">Wide, thin and flexible — in a shoe that still looks like a sneaker.
+          <div class="sub" data-i18n="vivo.sub">Wide, thin and flexible – footwear that still looks like a sneaker.
           </div>
           <p class="desc" data-i18n="vivo.desc">The same barefoot thinking in a familiar shape. A foot-shaped toe box
             lets your toes spread out, the sole is thin, flexible and puncture-resistant, and there is no thick foam or
@@ -541,7 +556,7 @@
   <section class="choose">
     <div class="wrap">
       <h2 data-i18n="choose.title">Which pair is yours?</h2>
-      <p class="note" data-i18n="choose.note">Both let your feet work. They just get there differently — this is the
+      <p class="note" data-i18n="choose.note">Both let your feet work. They just get there differently – this is the
         short version, and the staff at the booth will take you through the rest.</p>
       <div class="table">
         <div class="trow thead">
@@ -614,11 +629,11 @@
           </div>
           <div class="arow">
             <div class="k" data-i18n="access.k3">HOURS</div>
-            <div class="v" data-i18n="access.v3">10:00 – 22:00</div>
+            <div class="v" data-i18n="access.v3">10 am - 10 pm</div>
           </div>
           <div class="arow">
             <div class="k" data-i18n="access.k4">BY TRAIN</div>
-            <div class="v" data-i18n="access.v4">BTS Asok Exit 1 or MRT Sukhumvit Exit 3 — the skywalk goes straight
+            <div class="v" data-i18n="access.v4">BTS Asok Exit 1 or MRT Sukhumvit Exit 3 – the skywalk goes straight
               into the mall.</div>
           </div>
         </div>
@@ -675,12 +690,12 @@
         "hero.title": "Terminal 21 Asok G&nbsp;Floor",
         "hero.cta": "Find the booth",
         "strip.k1": "DATES", "strip.v1": "15 Sep&nbsp;(TUE) – 4 Oct&nbsp;(SUN) 2026",
-        "strip.k2": "OPEN DAILY", "strip.v2": "10:00 – 22:00",
+        "strip.k2": "OPEN DAILY", "strip.v2": "10 am - 10 pm",
         "strip.k3": "VENUE", "strip.v3": "Terminal 21 Asok, G Floor",
         "vff.sub": "Five separate toes, and nothing between you and the ground.",
         "vff.desc": "Every toe gets its own pocket, so your foot can spread, grip and balance the way it does barefoot. The Vibram rubber sole is thin enough to read the surface under you and tough enough for real ground. Models for the gym, the trail, the water and the street.",
         "vff.f1": "Gym and training", "vff.f2": "Trail and outdoors", "vff.f3": "Water and travel", "vff.f4": "Everyday wear",
-        "vivo.sub": "Wide, thin and flexible — in a shoe that still looks like a sneaker.",
+        "vivo.sub": "Wide, thin and flexible – footwear that still looks like a sneaker.",
         "vivo.desc": "The same barefoot thinking in a familiar shape. A foot-shaped toe box lets your toes spread out, the sole is thin, flexible and puncture-resistant, and there is no thick foam or raised heel in the way. Primus Lite IV and the rest of the range are at the booth to try.",
         "vivo.f1": "Wide, foot-shaped toe box", "vivo.f2": "Thin, flexible sole", "vivo.f3": "Flat from heel to toe", "vivo.f4": "Everyday wear and training",
         "lb.hint": "Tap the image to zoom",
@@ -689,7 +704,7 @@
         "vff.sale1": "Regular Items 10% OFF",
         "vff.sale2": "Selected Items 20% OFF",
         "choose.title": "Which pair is yours?",
-        "choose.note": "Both let your feet work. They just get there differently — this is the short version, and the staff at the booth will take you through the rest.",
+        "choose.note": "Both let your feet work. They just get there differently – this is the short version, and the staff at the booth will take you through the rest.",
         "choose.r1": "Ground feel", "choose.r1v": "As direct as it gets, with toes moving independently", "choose.r1w": "Very direct, with the foot held as one",
         "choose.r2": "Look", "choose.r2v": "Unmistakably toed", "choose.r2w": "Reads as an ordinary sneaker",
         "choose.r4": "Socks", "choose.r4v": "Five-toe socks (we sell them at the booth)", "choose.r4w": "Any socks you already own",
@@ -700,8 +715,8 @@
         "access.title": "Where to find us",
         "access.k1": "VENUE", "access.v1": "Terminal 21 Asok, G Floor<br>88 Soi Sukhumvit 19, Khlong Toei Nuea, Watthana, Bangkok 10110",
         "access.k2": "DATES", "access.v2": "15 September&nbsp;(TUE) – 4 October&nbsp;(SUN) 2026",
-        "access.k3": "HOURS", "access.v3": "10:00 – 22:00",
-        "access.k4": "BY TRAIN", "access.v4": "BTS Asok Exit 1 or MRT Sukhumvit Exit 3 — the skywalk goes straight into the mall.",
+        "access.k3": "HOURS", "access.v3": "10 am - 10 pm",
+        "access.k4": "BY TRAIN", "access.v4": "BTS Asok Exit 1 or MRT Sukhumvit Exit 3 – the skywalk goes straight into the mall.",
         "access.map": "See the map",
         "access.mapnote": "Tap the plan to zoom",
       },
