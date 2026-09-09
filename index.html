@@ -854,27 +854,33 @@
     // Thai visitors get Thai first
     if ((navigator.language || "").toLowerCase().startsWith("th")) setLang("th");
 
-    const nav = document.getElementById("nav");
-    const onScroll = () => nav.classList.toggle("solid", window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    /* body carries overflow-x: hidden, and Safari on iOS answers that by
+       making body the scroller: window.scrollY stays 0 and scroll never
+       fires on window. So read whichever element actually moved, and
+       listen in the capture phase, where scroll from any scroller lands.
+       touchmove and wheel are the belt to that pair of braces. */
+    const scrollTop = () =>
+      window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-    /* the LINE button shakes once when the page starts moving, and not
-       again until it has been still for 700ms: one shake per scroll,
-       however long that scroll runs */
-    (function () {
-      const fab = document.querySelector(".line-fab");
+    const nav = document.getElementById("nav");
+    const fab = document.querySelector(".line-fab");
+    let moving = false, idle = 0;
+    if (fab) fab.addEventListener("animationend", () => fab.classList.remove("wiggle"));
+
+    const onScroll = () => {
+      nav.classList.toggle("solid", scrollTop() > 40);
       if (!fab) return;
-      let moving = false, idle = 0;
-      fab.addEventListener("animationend", () => fab.classList.remove("wiggle"));
-      window.addEventListener("scroll", () => {
-        clearTimeout(idle);
-        idle = setTimeout(() => { moving = false; }, 700);
-        if (moving) return;
-        moving = true;
-        fab.classList.add("wiggle");
-      }, { passive: true });
-    })();
+      /* one shake when the page starts moving, and not again until it
+         has been still for 700ms, however long the scroll runs */
+      clearTimeout(idle);
+      idle = setTimeout(() => { moving = false; }, 700);
+      if (moving) return;
+      moving = true;
+      fab.classList.add("wiggle");
+    };
+    nav.classList.toggle("solid", scrollTop() > 40);
+    ["scroll", "touchmove", "wheel"].forEach(ev =>
+      window.addEventListener(ev, onScroll, { passive: true, capture: true }));
 
     /* ---------- models lightbox ---------- */
     (function () {
