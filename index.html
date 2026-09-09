@@ -100,9 +100,19 @@
       padding: 0.85rem clamp(1rem, 4vw, 2.2rem);
       background: #fff;
       border-bottom: 1px solid var(--mineral-2);
-      transition: box-shadow .35s ease;
+      transition: background-color .35s ease, box-shadow .35s ease;
     }
-    .nav.solid { box-shadow: 0 2px 16px rgba(0, 0, 0, .13); }
+    /* 90% white is as far as this can go: the wordmark sets "inc" in
+       #6C6D70, which still holds 4.15:1 there even over a black section */
+    .nav.solid {
+      background: rgba(255, 255, 255, .9);
+      backdrop-filter: blur(16px) saturate(1.4);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, .1);
+    }
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .nav.solid { background: #fff; }
+    }
     .nav-brand { display: flex; align-items: center; flex: 0 0 auto; text-decoration: none; }
     .nav-brand img { display: block; height: 30px; width: auto; }
     @media (max-width: 620px) { .nav-brand img { height: 24px; } }
@@ -144,7 +154,7 @@
       --vivo-w: clamp(150px, 15.8vw, 227px);
       --vivo-clear: calc(var(--vivo-w) * .28);
       width: min(880px, calc(100% - 2.5rem));
-      background: rgba(6, 6, 6, .42);
+      background: rgba(6, 6, 6, .3);
       backdrop-filter: blur(3px);
       text-shadow: 0 1px 3px rgba(0, 0, 0, .6), 0 2px 18px rgba(0, 0, 0, .7);
       color: #fff;
@@ -324,7 +334,7 @@
     .arow .k { font-family: var(--display); font-size: .82rem; letter-spacing: .12em; color: rgba(255, 255, 255, .68); }
     .arow .v { font-size: .96rem; }
     .maplink {
-      display: block; width: fit-content; margin-top: .65rem; color: #fff; text-decoration: none;
+      display: inline; margin-left: .7rem; color: #fff; text-decoration: none;
       border-bottom: 2px solid var(--t21-y); font-weight: 600; font-size: .92rem; padding-bottom: 2px;
     }
     .maplink:hover { border-bottom-color: #fff; }
@@ -475,7 +485,7 @@
           src="images/logo-vivo.png" alt="Vivobarefoot" width="1400" height="200" />
       </div>
       <div class="hero-edition" data-i18n="hero.edition">POPUP STORE</div>
-      <h1 data-i18n="hero.title">Terminal 21 Asok G&nbsp;Floor</h1>
+      <h1 data-i18n="hero.title">Terminal 21<br />Asok G&nbsp;Floor</h1>
       <button type="button" class="cta" data-lb="image" data-lb-src="images/floor-map.png"
         data-lb-alt="Terminal 21 Asok G Floor plan with our booth marked" data-i18n="hero.cta">Find the booth</button>
     </div>
@@ -490,7 +500,7 @@
         </div>
         <div class="strip-cell">
           <div class="k" data-i18n="strip.k2">OPENING TIME</div>
-          <div class="v" data-i18n="strip.v2">10 am - 10 pm</div>
+          <div class="v" data-i18n="strip.v2">10 am - 9:30 pm</div>
         </div>
         <div class="strip-cell">
           <div class="k" data-i18n="strip.k3">VENUE</div>
@@ -641,7 +651,7 @@
           </div>
           <div class="arow">
             <div class="k" data-i18n="access.k3">HOURS</div>
-            <div class="v" data-i18n="access.v3">10 am - 10 pm</div>
+            <div class="v" data-i18n="access.v3">10 am - 9:30 pm</div>
           </div>
           <div class="arow">
             <div class="k" data-i18n="access.k4">BY TRAIN</div>
@@ -699,10 +709,10 @@
       en: {
         "nav.access": "Getting there",
         "hero.edition": "POPUP STORE",
-        "hero.title": "Terminal 21 Asok G&nbsp;Floor",
+        "hero.title": "Terminal 21<br />Asok G&nbsp;Floor",
         "hero.cta": "Find the booth",
         "strip.k1": "DATES", "strip.v1": "15 Sep&nbsp;(TUE) – 4 Oct&nbsp;(SUN) 2026",
-        "strip.k2": "OPENING TIME", "strip.v2": "10 am - 10 pm",
+        "strip.k2": "OPENING TIME", "strip.v2": "10 am - 9:30 pm",
         "strip.k3": "VENUE", "strip.v3": "Terminal 21 Asok, G Floor",
         "vff.sub": "Five separate toes, and nothing between you and the ground.",
         "vff.desc": "Every toe gets its own pocket, so your foot can spread, grip and balance the way it does barefoot. The Vibram rubber sole is thin enough to read the surface under you and tough enough for real ground. Models for the gym, the trail, the water and the street.",
@@ -728,7 +738,7 @@
         "access.title": "Where to find us",
         "access.k1": "VENUE", "access.v1": "Terminal 21 Asok, G Floor<br>88 Soi Sukhumvit 19, Khlong Toei Nuea, Watthana, Bangkok 10110",
         "access.k2": "DATES", "access.v2": "15 September&nbsp;(TUE) – 4 October&nbsp;(SUN) 2026",
-        "access.k3": "HOURS", "access.v3": "10 am - 10 pm",
+        "access.k3": "HOURS", "access.v3": "10 am - 9:30 pm",
         "access.k4": "BY TRAIN", "access.v4": "BTS Asok Exit 1 or MRT Sukhumvit Exit 3 – the skywalk goes straight into the mall.",
         "access.map": "See the map",
         "access.mapnote": "Tap the plan to zoom",
@@ -736,10 +746,10 @@
       th: {
         "nav.access": "วิธีเดินทาง",
         "hero.edition": "POPUP STORE",
-        "hero.title": "เทอร์มินอล 21 อโศก ชั้น&nbsp;G",
+        "hero.title": "เทอร์มินอล 21<br />อโศก ชั้น&nbsp;G",
         "hero.cta": "ดูตำแหน่งบูธ",
         "strip.k1": "วันที่", "strip.v1": "อ.&nbsp;15 ก.ย. – อา.&nbsp;4 ต.ค. 2569",
-        "strip.k2": "เวลาทำการ", "strip.v2": "10:00 – 22:00",
+        "strip.k2": "เวลาทำการ", "strip.v2": "10:00 – 21:30",
         "strip.k3": "สถานที่", "strip.v3": "เทอร์มินอล 21 อโศก ชั้น G",
         "vff.sub": "ห้านิ้วแยกอิสระ ไม่มีอะไรมากั้นระหว่างเท้ากับพื้น",
         "vff.desc": "นิ้วเท้าทุกนิ้วมีช่องของตัวเอง เท้าจึงกางนิ้ว จิกพื้น และทรงตัวได้เหมือนตอนเท้าเปล่า พื้นยาง Vibram บางพอให้รับรู้พื้นผิวใต้เท้า แต่ก็ทนพอสำหรับการใช้งานจริง มีให้เลือกทั้งรุ่นสำหรับฟิตเนส เทรล ลุยน้ำ และใส่เดินในเมือง",
@@ -765,7 +775,7 @@
         "access.title": "สถานที่จัดงาน",
         "access.k1": "สถานที่", "access.v1": "เทอร์มินอล 21 อโศก ชั้น G<br>88 ซอยสุขุมวิท 19 แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110",
         "access.k2": "วันที่", "access.v2": "วันอังคารที่ 15 กันยายน – วันอาทิตย์ที่ 4 ตุลาคม 2569",
-        "access.k3": "เวลา", "access.v3": "10:00 – 22:00",
+        "access.k3": "เวลา", "access.v3": "10:00 – 21:30",
         "access.k4": "รถไฟฟ้า", "access.v4": "BTS อโศก ทางออก 1 หรือ MRT สุขุมวิท ทางออก 3 มีสกายวอล์กเชื่อมเข้าห้างได้โดยตรง",
         "access.map": "ดูแผนที่",
         "access.mapnote": "แตะที่แผนผังเพื่อซูม",
