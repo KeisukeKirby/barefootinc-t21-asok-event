@@ -98,33 +98,25 @@
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem;
       padding: 0.85rem clamp(1rem, 4vw, 2.2rem);
-      background: rgba(0, 0, 0, 0);
-      transition: background .35s ease, backdrop-filter .35s ease;
+      background: #fff;
+      border-bottom: 1px solid var(--mineral-2);
+      transition: box-shadow .35s ease;
     }
-    .nav::before {
-      content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-      background: linear-gradient(180deg, rgba(0, 0, 0, .62), rgba(0, 0, 0, 0));
-      transition: opacity .35s ease;
-    }
-    .nav.solid::before { opacity: 0; }
-    .nav.solid {
-      background: rgba(10, 10, 10, .88);
-      backdrop-filter: blur(10px);
-    }
+    .nav.solid { box-shadow: 0 2px 16px rgba(0, 0, 0, .13); }
     .nav-brand { display: flex; align-items: center; flex: 0 0 auto; text-decoration: none; }
     .nav-brand img { display: block; height: 30px; width: auto; }
     @media (max-width: 620px) { .nav-brand img { height: 24px; } }
     .nav-links { display: flex; align-items: center; gap: 1.4rem; }
     .nav-links a {
-      color: rgba(255, 255, 255, .82); text-decoration: none;
+      color: var(--ink); text-decoration: none;
       font-size: .84rem; font-weight: 500; letter-spacing: .02em;
       padding-bottom: 2px; border-bottom: 1px solid transparent;
     }
-    .nav-links a:hover { color: #fff; border-bottom-color: var(--gold); }
-    .lang { display: flex; border: 1px solid rgba(255, 255, 255, .4); border-radius: 2px; overflow: hidden; }
+    .nav-links a:hover { color: #000; border-bottom-color: var(--gold); }
+    .lang { display: flex; border: 1px solid var(--mineral-2); border-radius: 2px; overflow: hidden; }
     .lang button {
       font-family: var(--body); font-size: .74rem; font-weight: 600; letter-spacing: .05em;
-      padding: .3rem .6rem; background: transparent; color: rgba(255, 255, 255, .8);
+      padding: .3rem .6rem; background: transparent; color: var(--slate);
       border: 0; cursor: pointer;
     }
     .lang button[aria-pressed="true"] { background: var(--gold); color: #000; }
@@ -176,9 +168,10 @@
       gap: clamp(.85rem, 3.2vw, 2.1rem);
       margin-bottom: clamp(1.3rem, 3vw, 2rem); flex-wrap: wrap;
     }
-    .hero-brands .x {
-      font-family: var(--display); color: var(--gold); line-height: 1;
-      font-size: clamp(1.3rem, 3.4vw, 2rem);
+    .hero-brands .sep {
+      flex: 0 0 auto; width: 2px; border-radius: 1px;
+      height: clamp(28px, 5.6vw, 54px);
+      background: rgba(255, 255, 255, .5);
     }
     .hero-brands .blogo { width: auto; }
     .blogo-vff { height: clamp(30px, 6.2vw, 60px); }
@@ -457,7 +450,7 @@
     <div class="hero-card">
       <div class="hero-brands">
         <img class="blogo blogo-vff" src="images/logo-vff.png" alt="Vibram FiveFingers"
-          width="720" height="155" /><span class="x">&times;</span><img class="blogo blogo-vivo"
+          width="720" height="155" /><span class="sep" aria-hidden="true"></span><img class="blogo blogo-vivo"
           src="images/logo-vivo.png" alt="Vivobarefoot" width="720" height="130" />
       </div>
       <div class="hero-edition" data-i18n="hero.edition">POPUP STORE</div>
