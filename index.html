@@ -280,7 +280,9 @@
       .brand-grid, .brand-vivo .brand-grid { grid-template-columns: 1fr; direction: ltr; }
       /* the 3/2 crop cuts the shoe out of a 4/5 frame; hold the bottom */
       .brand-photo img { aspect-ratio: 3 / 2; object-position: center bottom; }
-      /* the Motus frame puts the shoes at 61-76% of its height; centre the band on them */
+      /* both frames are 2:3 and the 3/2 crop keeps 44% of the height,
+         so aim each one at its own shoes rather than the shared bottom */
+      .brand-vff .brand-photo img { object-position: center 56%; }
       .brand-vivo .brand-photo img { object-position: center 83%; }
     }
 
@@ -292,22 +294,22 @@
     .trow { display: grid; grid-template-columns: 8.5rem 1fr 1fr; border-bottom: 1px solid rgba(27, 26, 31, .18); }
     .trow > div { padding: 1rem .9rem; font-size: .93rem; }
     .trow .rk { font-family: var(--display); letter-spacing: .06em; color: #56525C; font-size: .88rem; }
-    .trow .cv { background: var(--black); color: #fff; }
-    .trow .cw { background: #fff; }
+    .trow .cv { background: #fff; }
+    .trow .cw { background: var(--black); color: #fff; }
     .thead .cv, .thead .cw {
       font-family: var(--display); font-weight: 600; letter-spacing: .1em;
       text-transform: uppercase; font-size: .92rem;
     }
     .thead .cv { border-bottom: 3px solid var(--gold); }
-    .thead .cw { border-bottom: 3px solid var(--slate); }
+    .thead .cw { border-bottom: 3px solid #fff; }
     @media (max-width: 720px) {
       .trow { grid-template-columns: 1fr; border-bottom: 0; }
       .trow .rk { background: var(--mineral-2); padding: .6rem .9rem; border-top: 1px solid rgba(27,26,31,.18); }
       .thead { display: none; }
       .trow .cv::before { content: attr(data-b); display: block; font-family: var(--display);
-        font-size: .7rem; letter-spacing: .14em; color: var(--gold); margin-bottom: .2rem; }
-      .trow .cw::before { content: attr(data-b); display: block; font-family: var(--display);
         font-size: .7rem; letter-spacing: .14em; color: var(--slate); margin-bottom: .2rem; }
+      .trow .cw::before { content: attr(data-b); display: block; font-family: var(--display);
+        font-size: .7rem; letter-spacing: .14em; color: rgba(255, 255, 255, .7); margin-bottom: .2rem; }
     }
 
     /* ---------- booth ---------- */
@@ -400,6 +402,21 @@
 
     .lb { position: fixed; inset: 0; z-index: 200; background: rgba(0, 0, 0, .94); }
     .lb[hidden] { display: none; }
+    /* the pan and zoom transform lives on the image, so the entrance
+       animates the stage around it and the two never fight */
+    @media (prefers-reduced-motion: no-preference) {
+      .lb:not([hidden]) { animation: lb-in .22s ease both; }
+      .lb:not([hidden]) .lb-stage,
+      .lb:not([hidden]) .lb-close,
+      .lb:not([hidden]) .lb-hint { animation: lb-pop .3s cubic-bezier(.19, 1, .3, 1) both; }
+      .lb:not([hidden]) .lb-close { animation-delay: .08s; }
+      .lb:not([hidden]) .lb-hint { animation-delay: .12s; }
+    }
+    @keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes lb-pop {
+      from { opacity: 0; transform: scale(.9) translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
     .lb-stage {
       position: absolute; inset: 0; overflow: hidden; touch-action: none;
       display: flex; align-items: center; justify-content: center;
@@ -500,7 +517,7 @@
         </div>
         <div class="strip-cell">
           <div class="k" data-i18n="strip.k2">OPENING TIME</div>
-          <div class="v" data-i18n="strip.v2">10 am - 9:30 pm</div>
+          <div class="v" data-i18n="strip.v2">10 am - 10 pm</div>
         </div>
         <div class="strip-cell">
           <div class="k" data-i18n="strip.k3">VENUE</div>
@@ -514,7 +531,8 @@
     <div class="wrap">
       <div class="brand-grid">
         <div class="brand-photo">
-          <img src="images/brand-vff.jpg" alt="Vibram FiveFingers worn seated in a studio" loading="lazy" />
+          <img src="images/brand-vff.jpg" alt="Vibram FiveFingers V-Aqua worn standing in shallow water"
+            loading="lazy" />
         </div>
         <div>
           <img class="brand-logo" src="images/logo-vff-dark.png" alt="Vibram FiveFingers" width="720" height="155" />
@@ -651,7 +669,7 @@
           </div>
           <div class="arow">
             <div class="k" data-i18n="access.k3">HOURS</div>
-            <div class="v" data-i18n="access.v3">10 am - 9:30 pm</div>
+            <div class="v" data-i18n="access.v3">10 am - 10 pm</div>
           </div>
           <div class="arow">
             <div class="k" data-i18n="access.k4">BY TRAIN</div>
@@ -712,7 +730,7 @@
         "hero.title": "Terminal 21<br />Asok G&nbsp;Floor",
         "hero.cta": "Find the booth",
         "strip.k1": "DATES", "strip.v1": "15 Sep&nbsp;(TUE) – 4 Oct&nbsp;(SUN) 2026",
-        "strip.k2": "OPENING TIME", "strip.v2": "10 am - 9:30 pm",
+        "strip.k2": "OPENING TIME", "strip.v2": "10 am - 10 pm",
         "strip.k3": "VENUE", "strip.v3": "Terminal 21 Asok, G Floor",
         "vff.sub": "Five separate toes, and nothing between you and the ground.",
         "vff.desc": "Every toe gets its own pocket, so your foot can spread, grip and balance the way it does barefoot. The Vibram rubber sole is thin enough to read the surface under you and tough enough for real ground. Models for the gym, the trail, the water and the street.",
@@ -738,7 +756,7 @@
         "access.title": "Where to find us",
         "access.k1": "VENUE", "access.v1": "Terminal 21 Asok, G Floor<br>88 Soi Sukhumvit 19, Khlong Toei Nuea, Watthana, Bangkok 10110",
         "access.k2": "DATES", "access.v2": "15 September&nbsp;(TUE) – 4 October&nbsp;(SUN) 2026",
-        "access.k3": "HOURS", "access.v3": "10 am - 9:30 pm",
+        "access.k3": "HOURS", "access.v3": "10 am - 10 pm",
         "access.k4": "BY TRAIN", "access.v4": "BTS Asok Exit 1 or MRT Sukhumvit Exit 3 – the skywalk goes straight into the mall.",
         "access.map": "See the map",
         "access.mapnote": "Tap the plan to zoom",
@@ -749,7 +767,7 @@
         "hero.title": "เทอร์มินอล 21<br />อโศก ชั้น&nbsp;G",
         "hero.cta": "ดูตำแหน่งบูธ",
         "strip.k1": "วันที่", "strip.v1": "อ.&nbsp;15 ก.ย. – อา.&nbsp;4 ต.ค. 2569",
-        "strip.k2": "เวลาทำการ", "strip.v2": "10:00 – 21:30",
+        "strip.k2": "เวลาทำการ", "strip.v2": "10:00 – 22:00",
         "strip.k3": "สถานที่", "strip.v3": "เทอร์มินอล 21 อโศก ชั้น G",
         "vff.sub": "ห้านิ้วแยกอิสระ ไม่มีอะไรมากั้นระหว่างเท้ากับพื้น",
         "vff.desc": "นิ้วเท้าทุกนิ้วมีช่องของตัวเอง เท้าจึงกางนิ้ว จิกพื้น และทรงตัวได้เหมือนตอนเท้าเปล่า พื้นยาง Vibram บางพอให้รับรู้พื้นผิวใต้เท้า แต่ก็ทนพอสำหรับการใช้งานจริง มีให้เลือกทั้งรุ่นสำหรับฟิตเนส เทรล ลุยน้ำ และใส่เดินในเมือง",
@@ -775,7 +793,7 @@
         "access.title": "สถานที่จัดงาน",
         "access.k1": "สถานที่", "access.v1": "เทอร์มินอล 21 อโศก ชั้น G<br>88 ซอยสุขุมวิท 19 แขวงคลองเตยเหนือ เขตวัฒนา กรุงเทพฯ 10110",
         "access.k2": "วันที่", "access.v2": "วันอังคารที่ 15 กันยายน – วันอาทิตย์ที่ 4 ตุลาคม 2569",
-        "access.k3": "เวลา", "access.v3": "10:00 – 21:30",
+        "access.k3": "เวลา", "access.v3": "10:00 – 22:00",
         "access.k4": "รถไฟฟ้า", "access.v4": "BTS อโศก ทางออก 1 หรือ MRT สุขุมวิท ทางออก 3 มีสกายวอล์กเชื่อมเข้าห้างได้โดยตรง",
         "access.map": "ดูแผนที่",
         "access.mapnote": "แตะที่แผนผังเพื่อซูม",
