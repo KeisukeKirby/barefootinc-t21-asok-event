@@ -179,9 +179,10 @@
     }
     /* the word sits over the asphalt frame, whose brightest fifth runs
        to .144: the colour carries a tighter shadow of its own so it
-       separates from the grain rather than relying on the ratio alone */
+       separates from the grain rather than relying on the ratio alone.
+       Hue 354 rather than 340; shifting toward red costs no luminance */
     .hero h1 .hl {
-      color: #FF6196;
+      color: #FF6372;
       text-shadow: 0 1px 2px rgba(0, 0, 0, .85), 0 0 16px rgba(0, 0, 0, .8), 0 2px 18px rgba(0, 0, 0, .7);
     }
     .hero-brands {
@@ -858,17 +859,19 @@
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    /* the LINE button shakes the moment the page moves, then holds off
-       for 2.5s so a long scroll is a nudge and not a twitch */
+    /* the LINE button shakes once when the page starts moving, and not
+       again until it has been still for 700ms: one shake per scroll,
+       however long that scroll runs */
     (function () {
       const fab = document.querySelector(".line-fab");
       if (!fab) return;
-      let last = 0;
+      let moving = false, idle = 0;
       fab.addEventListener("animationend", () => fab.classList.remove("wiggle"));
       window.addEventListener("scroll", () => {
-        const now = Date.now();
-        if (now - last < 2500 || fab.classList.contains("wiggle")) return;
-        last = now;
+        clearTimeout(idle);
+        idle = setTimeout(() => { moving = false; }, 700);
+        if (moving) return;
+        moving = true;
         fab.classList.add("wiggle");
       }, { passive: true });
     })();
