@@ -867,22 +867,38 @@
     let armed = true, idle = 0;
     if (fab) fab.addEventListener("animationend", () => fab.classList.remove("wiggle"));
 
-    const onScroll = () => {
-      nav.classList.toggle("solid", scrollTop() > 40);
-      if (!fab) return;
-      /* one shake per scroll. A scroll fires events every frame or so,
-         and 150ms of quiet is what separates one flick or notch from the
-         next, so a continuous scroll shakes once and a second scroll
-         shakes again even if it lands on the heels of the first. */
-      clearTimeout(idle);
-      idle = setTimeout(() => { armed = true; }, 150);
-      if (!armed) return;
-      armed = false;
+    let lastShake = 0, lastPos = scrollTop();
+    const shake = () => {
+      /* 400ms apart at the most, so they read as separate shakes rather
+         than one long blur while a flick is running */
+      const now = Date.now();
+      if (now - lastShake < 400) return false;
+      lastShake = now;
+      lastPos = scrollTop();
       /* restart it rather than let the new scroll fall inside the
          700ms the last shake is still playing out */
       fab.classList.remove("wiggle");
       void fab.offsetWidth;
       fab.classList.add("wiggle");
+      return true;
+    };
+
+    const onScroll = () => {
+      nav.classList.toggle("solid", scrollTop() > 40);
+      if (!fab) return;
+      /* every 250px of travel is another scroll. A thumb drags and then
+         the page coasts, both of which are one unbroken stream of events,
+         so counting distance is what keeps it going where counting gaps
+         between events cannot. */
+      if (Math.abs(scrollTop() - lastPos) >= 250) { shake(); return; }
+      /* and a separate scroll still counts even if it covered no
+         distance to speak of: 150ms of quiet separates one from the next */
+      clearTimeout(idle);
+      idle = setTimeout(() => { armed = true; }, 150);
+      /* only spend the trigger if the shake actually ran, or a scroll
+         landing inside the 400ms floor would be swallowed whole */
+      if (!armed) return;
+      if (shake()) armed = false;
     };
     nav.classList.toggle("solid", scrollTop() > 40);
     ["scroll", "touchmove", "wheel"].forEach(ev =>
