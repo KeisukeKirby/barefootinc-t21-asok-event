@@ -864,18 +864,24 @@
 
     const nav = document.getElementById("nav");
     const fab = document.querySelector(".line-fab");
-    let moving = false, idle = 0;
+    let armed = true, idle = 0;
     if (fab) fab.addEventListener("animationend", () => fab.classList.remove("wiggle"));
 
     const onScroll = () => {
       nav.classList.toggle("solid", scrollTop() > 40);
       if (!fab) return;
-      /* one shake when the page starts moving, and not again until it
-         has been still for 700ms, however long the scroll runs */
+      /* one shake per scroll. A scroll fires events every frame or so,
+         and 150ms of quiet is what separates one flick or notch from the
+         next, so a continuous scroll shakes once and a second scroll
+         shakes again even if it lands on the heels of the first. */
       clearTimeout(idle);
-      idle = setTimeout(() => { moving = false; }, 700);
-      if (moving) return;
-      moving = true;
+      idle = setTimeout(() => { armed = true; }, 150);
+      if (!armed) return;
+      armed = false;
+      /* restart it rather than let the new scroll fall inside the
+         700ms the last shake is still playing out */
+      fab.classList.remove("wiggle");
+      void fab.offsetWidth;
       fab.classList.add("wiggle");
     };
     nav.classList.toggle("solid", scrollTop() > 40);
