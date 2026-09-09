@@ -225,8 +225,8 @@
 
     /* ---------- brand blocks ---------- */
     .brand { padding: clamp(3.5rem, 8vw, 6rem) 0; }
-    .brand-vff { background: var(--black); color: #fff; }
-    .brand-vivo { background: var(--mineral-2); color: var(--ink); }
+    .brand-vff { background: #fff; color: var(--ink); }
+    .brand-vivo { background: var(--black); color: #fff; }
     .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
     .brand-vivo .brand-grid { direction: rtl; }
     .brand-vivo .brand-grid > * { direction: ltr; }
@@ -249,24 +249,26 @@
       font-size: clamp(1.05rem, 2.4vw, 1.3rem); line-height: 1.35;
       margin-bottom: 1.2rem;
     }
-    .brand-vff .sub { color: var(--gold); }
-    .brand-vivo .sub { color: var(--slate); }
+    .brand-vff .sub { color: var(--slate); }
+    .brand-vivo .sub { color: rgba(255, 255, 255, .72); }
     .brand p.desc { font-size: 1rem; line-height: 1.85; max-width: 52ch; }
-    .brand-vff p.desc { color: rgba(255, 255, 255, .78); }
+    .brand-vivo p.desc { color: rgba(255, 255, 255, .78); }
     .feats { margin-top: 1.8rem; display: grid; gap: 0; }
     .feat {
       padding: .7rem 0; font-size: .93rem; font-weight: 500;
       display: flex; align-items: baseline; gap: .8rem;
     }
-    .brand-vff .feat { border-top: 1px solid rgba(255, 255, 255, .16); }
-    .brand-vivo .feat { border-top: 1px solid rgba(64, 88, 96, .25); }
+    .brand-vff .feat { border-top: 1px solid rgba(27, 26, 31, .18); }
+    .brand-vivo .feat { border-top: 1px solid rgba(255, 255, 255, .16); }
     .feat .dot { width: 7px; height: 7px; flex: none; }
-    .brand-vff .feat .dot { background: var(--gold); }
-    .brand-vivo .feat .dot { background: var(--slate); }
+    .brand-vff .feat .dot { background: var(--ink); }
+    .brand-vivo .feat .dot { background: #fff; }
     @media (max-width: 860px) {
       .brand-grid, .brand-vivo .brand-grid { grid-template-columns: 1fr; direction: ltr; }
       /* the 3/2 crop cuts the shoe out of a 4/5 frame; hold the bottom */
       .brand-photo img { aspect-ratio: 3 / 2; object-position: center bottom; }
+      /* the Motus frame puts the shoes at 61-76% of its height; centre the band on them */
+      .brand-vivo .brand-photo img { object-position: center 83%; }
     }
 
     /* ---------- choose ---------- */
@@ -482,7 +484,7 @@
           <div class="v" data-i18n="strip.v1">15 Sep&nbsp;(TUE) – 4 Oct&nbsp;(SUN) 2026</div>
         </div>
         <div class="strip-cell">
-          <div class="k" data-i18n="strip.k2">OPEN DAILY</div>
+          <div class="k" data-i18n="strip.k2">OPENING TIME</div>
           <div class="v" data-i18n="strip.v2">10 am - 10 pm</div>
         </div>
         <div class="strip-cell">
@@ -500,7 +502,7 @@
           <img src="images/brand-vff.jpg" alt="Vibram FiveFingers worn seated in a studio" loading="lazy" />
         </div>
         <div>
-          <img class="brand-logo" src="images/logo-vff.png" alt="Vibram FiveFingers" width="720" height="155" />
+          <img class="brand-logo" src="images/logo-vff-dark.png" alt="Vibram FiveFingers" width="720" height="155" />
           <h2>Vibram FiveFingers</h2>
           <div class="sub" data-i18n="vff.sub">Five separate toes, and nothing between you and the ground.</div>
           <p class="desc" data-i18n="vff.desc">Every toe gets its own pocket, so your foot can spread, grip and balance
@@ -525,10 +527,11 @@
     <div class="wrap">
       <div class="brand-grid">
         <div class="brand-photo">
-          <img src="images/brand-vivo.jpg" alt="Vivobarefoot Motus Strength II in training" loading="lazy" />
+          <img src="images/brand-vivo.jpg" alt="Vivobarefoot Motus Strength II in Obsidian, worn seated after training"
+            loading="lazy" />
         </div>
         <div>
-          <img class="brand-logo" src="images/logo-vivo-portrait.png" alt="Vivobarefoot" width="1000" height="668" />
+          <img class="brand-logo" src="images/logo-vivo-portrait-white.png" alt="Vivobarefoot" width="1000" height="668" />
           <h2>Vivobarefoot</h2>
           <div class="sub" data-i18n="vivo.sub">Wide, thin and flexible – footwear that still looks like a sneaker.
           </div>
@@ -690,7 +693,7 @@
         "hero.title": "Terminal 21 Asok G&nbsp;Floor",
         "hero.cta": "Find the booth",
         "strip.k1": "DATES", "strip.v1": "15 Sep&nbsp;(TUE) – 4 Oct&nbsp;(SUN) 2026",
-        "strip.k2": "OPEN DAILY", "strip.v2": "10 am - 10 pm",
+        "strip.k2": "OPENING TIME", "strip.v2": "10 am - 10 pm",
         "strip.k3": "VENUE", "strip.v3": "Terminal 21 Asok, G Floor",
         "vff.sub": "Five separate toes, and nothing between you and the ground.",
         "vff.desc": "Every toe gets its own pocket, so your foot can spread, grip and balance the way it does barefoot. The Vibram rubber sole is thin enough to read the surface under you and tough enough for real ground. Models for the gym, the trail, the water and the street.",
@@ -726,7 +729,7 @@
         "hero.title": "เทอร์มินอล 21 อโศก ชั้น&nbsp;G",
         "hero.cta": "ดูตำแหน่งบูธ",
         "strip.k1": "วันที่", "strip.v1": "อ.&nbsp;15 ก.ย. – อา.&nbsp;4 ต.ค. 2569",
-        "strip.k2": "เปิดทุกวัน", "strip.v2": "10:00 – 22:00",
+        "strip.k2": "เวลาทำการ", "strip.v2": "10:00 – 22:00",
         "strip.k3": "สถานที่", "strip.v3": "เทอร์มินอล 21 อโศก ชั้น G",
         "vff.sub": "ห้านิ้วแยกอิสระ ไม่มีอะไรมากั้นระหว่างเท้ากับพื้น",
         "vff.desc": "นิ้วเท้าทุกนิ้วมีช่องของตัวเอง เท้าจึงกางนิ้ว จิกพื้น และทรงตัวได้เหมือนตอนเท้าเปล่า พื้นยาง Vibram บางพอให้รับรู้พื้นผิวใต้เท้า แต่ก็ทนพอสำหรับการใช้งานจริง มีให้เลือกทั้งรุ่นสำหรับฟิตเนส เทรล ลุยน้ำ และใส่เดินในเมือง",
