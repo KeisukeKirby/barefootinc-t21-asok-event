@@ -151,14 +151,14 @@
       transform: translate(-50%, -50%);
       /* the Vivo mark drives the card: its exclusion zone is 4X, and X is
          the wordmark cap height, .0699 of the lockup width */
-      --vivo-w: clamp(150px, 17vw, 240px);
+      --vivo-w: clamp(150px, 17vw, 210px);
       --vivo-clear: calc(var(--vivo-w) * .28);
-      width: min(820px, calc(100% - 2.5rem));
+      width: min(720px, calc(100% - 2.5rem));
       background: rgba(6, 6, 6, .3);
       backdrop-filter: blur(3px);
       text-shadow: 0 1px 3px rgba(0, 0, 0, .6), 0 2px 18px rgba(0, 0, 0, .7);
       color: #fff;
-      padding: max(clamp(1.8rem, 4vw, 3rem), var(--vivo-clear)) clamp(1.4rem, 4vw, 2rem) clamp(1.6rem, 3.6vw, 2.4rem);
+      padding: max(clamp(1.8rem, 4vw, 3rem), var(--vivo-clear)) clamp(1.4rem, 4vw, 1.75rem) clamp(1.6rem, 3.6vw, 2.4rem);
       text-align: center;
       border-top: 3px solid var(--gold);
     }
